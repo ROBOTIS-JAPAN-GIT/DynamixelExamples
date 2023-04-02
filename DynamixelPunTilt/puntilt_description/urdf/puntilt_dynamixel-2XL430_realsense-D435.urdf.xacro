@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<robot name="puntilt" xmlns:xacro="http://ros.org/wiki/xacro">\
+	<xacro:include filename="$(find dynamixel_description)/urdf/common_properties.xacro"/>
+	<xacro:include filename="$(find dynamixel_description)/urdf/_2XL430.urdf.xacro"/>
+    <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
+
+    <!-- realsense 関連の引数 -->
+    <xacro:arg name="use_nominal_extrinsics" default="true"/>
+    <xacro:arg name="add_plug" default="false" />
+    <xacro:arg name="use_mesh" default="true" />
+
+	<link name="world"/>
+
+    <joint name="joint_world_base" type="fixed">
+        <parent link="world"/>
+        <child link="base"/>
+        <origin xyz="0 0 0.005" rpy="0 0 0"/>
+    </joint>
+
+	<link name="base" />
+
+    <joint name="joint_base_yaw" type="fixed">
+        <parent link="base"/>
+        <child link="yaw"/>
+    </joint>
+
+	<link name="yaw">
+        <visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.03 0.04 0.001"/>
+			</geometry>
+			<material name="orange"/>
+		</visual>
+    </link>
+
+	<xacro:servo_2XL430 parent="yaw" center_parent="false" child="pitch" center_child="true" />
+
+	<link name="pitch">
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder length="0.001" radius="0.01"/>
+			</geometry>
+			<material name="red"/>
+		</visual>
+	</link>
+
+    <xacro:sensor_d435 parent="pitch" use_nominal_extrinsics="$(arg use_nominal_extrinsics)" add_plug="$(arg add_plug)" use_mesh="$(arg use_mesh)">
+        <origin xyz="-0.01 -0.035 0.0" rpy="${-pi/2} 0 ${-pi/2}"/>
+    </xacro:sensor_d435>
+
+	<gazebo reference="yaw">
+		<material>Gazebo/Orange</material>
+	</gazebo>
+	
+	<gazebo reference="pitch">
+		<material>Gazebo/Red</material>
+	</gazebo>
+    
+    <!--ros_controlプラグインをロード-->
+    <gazebo>
+        <plugin name="control" filename="libgazebo_ros_control.so"/>
+    </gazebo>
+</robot>
