@@ -1,31 +1,12 @@
 <launch>
-  <arg name="servo" default="dynamixel-2XL430" doc="support [dynamixel-2XL430, dynamixel-XM430-double]"/>
-  <arg name="senser" default="realsense-D435" doc="support [realsense-D435]"/>
+    <arg name="servo" default="dynamixel-2XL430" doc="support [dynamixel-2XL430, dynamixel-XM430-double]"/>
+    <arg name="senser" default="realsense-D435" doc="support [realsense-D435]"/>
 
-  <!-- rviz -->
-  <arg name="rviz_file_address" default="$(find puntilt_description)/rviz/display.rviz" /> 
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_file_address)" required="true" /> 
- 
-  <!-- controller -->
-  <rosparam>
-    puntilt_controller:      
-       type: position_controllers/JointTrajectoryController
-       joints: 
-         - yaw_joint
-         - pitch_joint
-   </rosparam>
-   <node name = "controller_spawner" pkg = "controller_manager" type = "spawner" args = "puntilt_controller"/>
-
-  <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="paused"       value="false"/>
-    <arg name="use_sim_time" value="true"/>
-    <arg name="gui"          value="true"/>
-    <arg name="headless"     value="false"/>
-    <arg name="debug"        value="false"/>
-  </include>
-
-  <param name="robot_description" command="$(find xacro)xacro $(find puntilt_description)/urdf/puntilt_$(arg servo)_$(arg senser).urdf.xacro" />
-  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model puntilt -x 0.0 -y 0.0 -z 0.5 -param robot_description" />
-
-</launch>
+    <param name="robot_description" command="$(find xacro)xacro $(find puntilt_description)/urdf/puntilt_$(arg servo)_$(arg senser).urdf.xacro" />
+   
+    <!-- rviz -->
+    <arg name="rviz_file_address" default="$(find puntilt_description)/rviz/display.rviz" /> 
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_file_address)" required="true" /> 
+ </launch>
