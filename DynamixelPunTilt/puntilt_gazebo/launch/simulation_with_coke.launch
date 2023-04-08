@@ -1,0 +1,28 @@
+<launch>
+    <arg name="servo" default="dynamixel-2XL430" doc="support [dynamixel-2XL430, dynamixel-XM430-double]"/>
+    <arg name="senser" default="realsense-D435" doc="support [realsense-D435]"/>
+
+    <!-- controller -->
+    <rosparam>
+        puntilt_controller:      
+            type: position_controllers/JointTrajectoryController
+            joints: 
+                - yaw_joint
+                - pitch_joint
+    </rosparam>
+    <node name = "controller_spawner" pkg = "controller_manager" type = "spawner" args = "puntilt_controller"/>
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find puntilt_gazebo)/worlds/red_sample.world"/>
+        <arg name="paused"       value="false"/>
+        <arg name="use_sim_time" value="true"/>
+        <arg name="gui"          value="true"/>
+        <arg name="headless"     value="false"/>
+        <arg name="debug"        value="false"/>
+    </include>
+
+    <param name="robot_description" command="$(find xacro)xacro $(find puntilt_description)/urdf/puntilt_$(arg servo)_$(arg senser).urdf.xacro" />
+    <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model puntilt -x 0.0 -y 0.0 -z 0.5 -param robot_description" />
+</launch>
+
+<!-- rostopic pub /puntilt_controller/command trajectory_msgs/JointTrajectory '{joint_names: ["pitch_joint", "yaw_joint"], points: [{positions: [0.1, -1.5], time_from_start: [1, 0]}]}' -1 -->
