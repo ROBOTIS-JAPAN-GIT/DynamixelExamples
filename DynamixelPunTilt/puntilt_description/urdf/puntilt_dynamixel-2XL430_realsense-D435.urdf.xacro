@@ -14,7 +14,7 @@
     <joint name="joint_world_base" type="fixed">
         <parent link="world"/>
         <child link="base"/>
-        <origin xyz="0 0 0.005" rpy="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
     </joint>
 
 	<link name="base" />
