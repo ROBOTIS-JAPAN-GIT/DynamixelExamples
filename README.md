@@ -24,3 +24,22 @@ catkin_ws/
 - `puntilt_description` : defines 3D model for gazebo simulation or visualization.
 - `puntilt_control` : is used for controlling puntilt.
   
+#### usage in simulation
+
+```
+$ roslaunch puntilt_gazebo simulation_with_coke.launch
+```
+
+```
+$ roslaunch puntilt_control tracking_target_color.launch
+```
+
+#### usage in real world
+
+```
+$ roslaunch puntilt_bringup {comming soon}
+```
+
+```
+$ roslaunch puntilt_control tracking_target_color.launch
+```

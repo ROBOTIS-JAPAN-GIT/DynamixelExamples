@@ -28,7 +28,6 @@ def callback_img(msg):
 
     contours, _ = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
-    print(now_pos)
     point = JointTrajectoryPoint()
     point.positions = [0,0]
     point.time_from_start = rospy.Duration.from_sec(1)
@@ -36,7 +35,6 @@ def callback_img(msg):
     if len(contours)!=0:
         largest_contour = max(contours, key=cv2.contourArea)
         x, y, w, h = cv2.boundingRect(largest_contour)
-        print(msg.width/2 - (x+w/2), msg.height/2 - (y+h/2))
         point.positions =(
             now_pos[0] + p_gain * (msg.width /2 - (x+w/2)) / msg.width, 
             now_pos[1] + p_gain * (msg.height/2 - (y+h/2)) / msg.height
