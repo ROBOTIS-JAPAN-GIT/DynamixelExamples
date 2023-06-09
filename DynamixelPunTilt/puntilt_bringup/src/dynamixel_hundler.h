@@ -68,10 +68,10 @@ public:
             ROS_ERROR("Length of id_list is mismatch to length of joint_list.");
         }
 
-        id_list_ = id_list;
-        joint_list_ =joint_list;
-        bool success = ReadPositionsAll(); // set now_positions_
-        if(success) target_positions_ = now_positions_;
+        id_list_    = id_list;
+        joint_list_ = joint_list;
+        /*set now_positions_   */ bool success = ReadPositionsAll();
+        /*set target_positions_*/ if(success) target_positions_ = now_positions_;
     }
 
     ~DynamixelHundler(){

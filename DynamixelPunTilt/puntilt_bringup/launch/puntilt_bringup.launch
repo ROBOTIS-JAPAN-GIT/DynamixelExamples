@@ -1,0 +1,8 @@
+<launch>
+    <node name="puntilt_bringup" pkg="puntilt_bringup" type="dynamixel_hundler" output="screen">
+        <param name="DEVICE_NAME" value="/dev/ttyUSB0" />
+        <param name="BAUDRATE" value="57600" />
+        <rosparam param="id_list"> [3, 4] </rosparam>
+        <rosparam param="joint_list"> [yaw_joint, pitch_joint] </rosparam>
+    </node>
+</launch>
