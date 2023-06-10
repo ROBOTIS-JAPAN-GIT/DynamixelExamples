@@ -3,9 +3,12 @@
     <node name="tracking_target_node" pkg="puntilt_control" type="tracking_target.py" output="screen">
         <param name="pan_joint_name"  value="yaw_joint"   />
         <param name="tilt_joint_name" value="pitch_joint" />
-        <param name="p_gain" value="0.5" />
-        <param name="d_gain" value="0.01" /> <!-- no need in almost situations -->
-        <param name="i_gain" value="0.001" /> <!-- no need in almost situations -->
+        <rosparam param="pan_joint_limit"> {min: -1.57, max: 1.57} </rosparam>
+        <rosparam param="tilt_joint_limit"> {min: -1.57, max: 1.57} </rosparam>
+        <param name="p_gain" value="0.075" />
+        <param name="d_gain" value="0.5" /> <!-- no need in almost situations -->
+        <param name="i_gain" value="0.0" /> <!-- no need in almost situations -->
+        <param name="step_time" value="0.1" /> <!-- [sec] fast -> set small value -->
     </node>
 
     <node name="detect_target_color_node" pkg="puntilt_control" type="detect_target_color.py" output="screen">
