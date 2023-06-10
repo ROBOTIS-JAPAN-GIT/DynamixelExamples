@@ -8,7 +8,7 @@ The following environment is assumed.
 catkin_ws/
     |- DynamixelSDK_jp_custom
     |- realsense-ros_jp_custom
-    └- DynamixelSDK_jp_custom
+    └- DynamixelExamples
 ```
 
 ## Examples
