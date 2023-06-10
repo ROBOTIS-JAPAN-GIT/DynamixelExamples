@@ -38,27 +38,12 @@
         <origin xyz="0 0 0.094" rpy="0 0 0"/>
     </joint>
 
-	<link name="puntilt_base">
-        <!-- <visual>
-			<origin xyz="0 0 0" rpy="0 0 0"/>
-			<geometry>
-				<box size="0.03 0.04 0.001"/>
-			</geometry>
-			<material name="orange"/>
-		</visual> -->
-    </link>
+	<link name="puntilt_base" />
 
-	<xacro:servo_2XL430 name_parent="yaw" parent="puntilt_base" center_parent="false" child="pitch" center_child="true" />
+	<xacro:servo_2XL430 name_parent="yaw"  parent="puntilt_base" center_parent="false" 
+                        name_child="pitch" child="pitch"         center_child="true" />
 
-	<link name="pitch">
-		<!-- <visual>
-			<origin xyz="0 0 0" rpy="0 0 0"/>
-			<geometry>
-				<cylinder length="0.001" radius="0.01"/>
-			</geometry>
-			<material name="red"/>
-		</visual> -->
-	</link>
+	<link name="pitch" />
 
     <xacro:sensor_d435 parent="pitch" use_nominal_extrinsics="$(arg use_nominal_extrinsics)" add_plug="$(arg add_plug)" use_mesh="$(arg use_mesh)">
         <origin xyz="-0.01 -0.035 0.0" rpy="${-pi/2} 0 ${-pi/2}"/>

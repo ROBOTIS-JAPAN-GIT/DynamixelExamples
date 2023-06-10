@@ -11,7 +11,6 @@ void DynamixelHundler::CallbackCommand(
         for (int j = 0; j < joint_list_.size(); j++) {
             if (joint_list_[j] == joint_name) {
                 positions[j] = (int)(angle * 4096 / (2 * M_PI) + 4096 / 2);
-                ROS_INFO_STREAM("        " << positions[j] << " position");
             }
         }
     }
@@ -60,8 +59,7 @@ void DynamixelHundler::WritePosisionsAll(
 
     for (size_t i = 0; i < id_list_.size(); ++i) {
         target_positions_[i] = position_list[i];
-        ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", id_list_[i],
-                 position_list[i]);
+        // ROS_INFO("setPosition : [ID:%d] [POSITION:%d]", id_list_[i], position_list[i]);
     }
     groupSyncWritePosition_.clearParam();
 }
@@ -91,7 +89,7 @@ bool DynamixelHundler::ReadPositionsAll() {
         int32_t position = groupSyncReadPosition_.getData(
             id_list_[i], ADDR_PRESENT_POSITION, 4);
         now_positions_[i] = position;
-        ROS_INFO("ReadPosition : [ID:%d] [POSITION:%d]", id_list_[i], position);
+        // ROS_INFO("ReadPosition : [ID:%d] [POSITION:%d]", id_list_[i], position);
     }
     groupSyncReadPosition_.clearParam();
     return true;

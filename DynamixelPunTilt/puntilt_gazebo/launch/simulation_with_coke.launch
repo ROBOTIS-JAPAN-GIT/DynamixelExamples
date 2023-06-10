@@ -24,5 +24,3 @@
     <param name="robot_description" command="$(find xacro)xacro $(find puntilt_description)/urdf/puntilt_$(arg servo)_$(arg senser).urdf.xacro" />
     <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model puntilt -x 0.0 -y 0.0 -z 0.0 -param robot_description" />
 </launch>
-
-<!-- rostopic pub /puntilt_controller/command trajectory_msgs/JointTrajectory '{joint_names: ["pitch_joint", "yaw_joint"], points: [{positions: [0.1, -1.5], time_from_start: [1, 0]}]}' -1 -->
