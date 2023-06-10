@@ -1,9 +1,11 @@
 <launch>
 
     <node name="tracking_target_node" pkg="puntilt_control" type="tracking_target.py" output="screen">
-        <param name="pan_joint_name" value="yaw_joint" />
+        <param name="pan_joint_name"  value="yaw_joint"   />
         <param name="tilt_joint_name" value="pitch_joint" />
         <param name="p_gain" value="0.5" />
+        <param name="d_gain" value="0.01" /> <!-- no need in almost situations -->
+        <param name="i_gain" value="0.001" /> <!-- no need in almost situations -->
     </node>
 
     <node name="detect_target_color_node" pkg="puntilt_control" type="detect_target_color.py" output="screen">
