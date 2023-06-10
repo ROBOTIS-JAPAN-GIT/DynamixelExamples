@@ -15,18 +15,12 @@ def callback_img(msg):
 
     hsv_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
-    lower_red = np.array([0, 50, 0])
-    upper_red = np.array([10, 255, 255])
-    red_mask1 = cv2.inRange(hsv_img, lower_red, upper_red)
+    mask1 = cv2.inRange(hsv_img, lower_target_color1, upper_target_color1)
+    mask2 = cv2.inRange(hsv_img, lower_target_color2, upper_target_color2)
+    mask = mask1 + mask2
 
-    lower_red = np.array([160, 50, 0])
-    upper_red = np.array([180, 255, 255])
-    red_mask2 = cv2.inRange(hsv_img, lower_red, upper_red)
+    contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
-    red_mask = red_mask1 + red_mask2
-
-    contours, _ = cv2.findContours(red_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    
     if len(contours)!=0:
         largest_contour = max(contours, key=cv2.contourArea)
         x, y, w, h = cv2.boundingRect(largest_contour)
@@ -38,6 +32,11 @@ def callback_img(msg):
 
 if __name__=="__main__":
     rospy.init_node('detect_target_color_node')
+
+    lower_target_color1 = np.array(rospy.get_param('~hsv_mask1_lower', [  0,  50,   0]))
+    upper_target_color1 = np.array(rospy.get_param('~hsv_mask1_upper', [ 10, 255, 255]))
+    lower_target_color2 = np.array(rospy.get_param('~hsv_mask2_lower', [160,  50,   0]))
+    upper_target_color2 = np.array(rospy.get_param('~hsv_mask2_upper', [180, 255, 255]))
 
     rospy.Subscriber('/camera/color/image_raw', Image, callback_img)
     pub_target = rospy.Publisher('/target_position/ratio', Pose2D, queue_size=10)
