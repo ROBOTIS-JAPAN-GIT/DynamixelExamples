@@ -44,6 +44,18 @@ $ roslaunch puntilt_bringup {comming soon}
 $ roslaunch puntilt_control tracking_target_color.launch
 ```
 
+### For developpers
+
+#### tracking対象を変更する場合．
+`puntilt_control/scripts/tracking_target.py`内にて以下の様に`Pose2D`型の`'target_position/ratio`トピックをsubscribeしています．
+``` puntilt_control/scripts/tracking_target.py
+ rospy.Subscriber('/target_position/ratio', Pose2D, callback_target)
+```
+`Pose2D`型の`x`, `y`フィールドの値はrealsenseの画角に対して物体の位置の割合を示します．
+`x`, `y` ともに`0`が中央，`±1`が画面の端です．xが左右，yが上下です．
+`tracking_target`ノードではこれらの値を`0`にするようにPID制御をかけています．
+姿勢を表す`theta`は現状では使用しておりません．
+
 #### WSL2越しにU2D2と接続するために
 以下のコマンドでU2D2が刺さっているUSBを特定して，`BUSID`を控える
 ```power shell
