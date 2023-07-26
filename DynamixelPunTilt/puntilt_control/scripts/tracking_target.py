@@ -31,7 +31,8 @@ def callback_target(msg):
     point = JointTrajectoryPoint()
     point.positions = (
         max( pan_joint_limit['min'], min(next_pos_x,  pan_joint_limit['max'])),
-        max(tilt_joint_limit['min'], min(next_pos_y, tilt_joint_limit['max']))
+        0.20
+        #max(tilt_joint_limit['min'], min(next_pos_y, tilt_joint_limit['max']))
     )
     point.time_from_start = rospy.Duration.from_sec(step_time)
     joint_trajectory = JointTrajectory()
