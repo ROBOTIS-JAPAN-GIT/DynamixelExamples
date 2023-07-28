@@ -1,0 +1,26 @@
+{
+    "folders": [
+        {
+            "path": "./"
+        }
+    ],
+    "settings": {
+        "terminal.integrated.profiles.windows": {
+            "GitBash": {
+                "icon": "terminal-bash",
+                "path": [
+                    "C:\\Added\\Git\\bin\\bash.exe"
+                ],
+                "args": [
+                    "--login",
+                    "-i",
+                    "-c",
+                    "wsl -d Ubuntu-20.04_robotis",
+                ]
+            },
+        },
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4,
+        "editor.formatOnSave": false
+    },
+}

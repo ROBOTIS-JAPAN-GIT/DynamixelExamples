@@ -13,35 +13,35 @@ catkin_ws/
 
 ## Examples
 
-- `DynamixelPunTilt/`
+- `DynamixelPanTilt/`
 - `other_example_to_be_released_later/`
 
 
-### DynamixelPunTilt
+### DynamixelPanTilt
 
-- `puntilt_bringup` : is used for starting up a real machine.
-- `puntilt_gazebo` : is used for simulating in gazebo.
-- `puntilt_description` : defines 3D model for gazebo simulation or visualization.
-- `puntilt_control` : is used for controlling puntilt.
+- `pantilt_bringup` : is used for starting up a real machine.
+- `pantilt_gazebo` : is used for simulating in gazebo.
+- `pantilt_description` : defines 3D model for gazebo simulation or visualization.
+- `pantilt_control` : is used for controlling pantilt.
   
 #### usage in simulation
 
 ```
-$ roslaunch puntilt_gazebo simulation_with_coke.launch
+$ roslaunch pantilt_gazebo simulation_with_coke.launch
 ```
 
 ```
-$ roslaunch puntilt_control tracking_target_color.launch
+$ roslaunch pantilt_control tracking_target_color.launch
 ```
 
 #### usage in real world
 
 ```
-$ roslaunch puntilt_bringup {comming soon}
+$ roslaunch pantilt_bringup {comming soon}
 ```
 
 ```
-$ roslaunch puntilt_control tracking_target_color.launch
+$ roslaunch pantilt_control tracking_target_color.launch
 ```
 
 #### WSL2越しにU2D2と接続するために
