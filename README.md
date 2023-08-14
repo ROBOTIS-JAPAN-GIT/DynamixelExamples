@@ -37,7 +37,7 @@ $ roslaunch pantilt_control tracking_target_color.launch
 #### usage in real world
 
 ```
-$ roslaunch pantilt_bringup {comming soon}
+$ roslaunch pantilt_bringup pantilt_bringup.launch
 ```
 
 ```
