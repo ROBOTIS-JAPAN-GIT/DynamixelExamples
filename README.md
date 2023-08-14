@@ -62,7 +62,7 @@ $ roslaunch pantilt_control tracking_target_color.launch
 PS C:\Windows\system32> usbipd wsl list
 ```
 
-以下のコマンドでWSLが認識するようにする
+以下のコマンドでWSLが認識するようにする.
 ```power shell
 PS C:\Windows\system32> usbipd wsl attach --distribution {Linux Distro} --busid {BUSID}
 ```
@@ -70,6 +70,7 @@ PS C:\Windows\system32> usbipd wsl attach --distribution {Linux Distro} --busid 
 ```power shell
 PS C:\Windows\system32> usbipd wsl detach --busid {BUSID}
 ```
+note: 管理者で実行する必要あり．
 
 以下のコマンドなどでwsl側からUSBデバイスが見えていることを確認する
 ```wsl
