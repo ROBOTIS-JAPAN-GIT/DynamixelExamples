@@ -46,3 +46,7 @@
 
 # Mac
 .DS_Store
+
+# inventor
+*.ipj
+OldVersions/
